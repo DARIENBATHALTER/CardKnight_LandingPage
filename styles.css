@@ -112,9 +112,24 @@ section,header,footer{position:relative;z-index:1}
 .wm-sub::before,.wm-sub::after{content:"";height:1px;width:clamp(20px,6vw,60px);
   background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 
+/* ===== Mascot (Sir Reginald Slime) ===== */
+.nav-mascot{height:46px;width:auto;margin:-10px 0;transform-origin:bottom center;
+  animation:slime-bob 2.6s ease-in-out infinite;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.4))}
+@keyframes slime-bob{
+  0%,100%{transform:translateY(0) scaleY(1) scaleX(1)}
+  50%{transform:translateY(-3px) scaleY(1.05) scaleX(.97)}
+}
+.nav-brand:hover .nav-mascot{animation:slime-hop .5s ease}
+@keyframes slime-hop{
+  0%{transform:translateY(0) scaleY(1)}
+  30%{transform:translateY(2px) scaleY(.82) scaleX(1.12)}   /* squash */
+  60%{transform:translateY(-9px) scaleY(1.12) scaleX(.9)}   /* stretch + leap */
+  100%{transform:translateY(0) scaleY(1)}
+}
+
 /* ===== Spinning card (canvas) ===== */
 .spincard{display:block}
-.nav-card{width:50px;height:50px;margin:-8px 0}
 .hero-card{width:clamp(190px,30vw,270px);height:clamp(190px,30vw,270px);margin:0 auto .2rem;
   filter:drop-shadow(0 12px 30px rgba(0,0,0,.55))}
 .tagline{font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.5rem);color:var(--ink);margin-top:1.2rem;font-weight:500}
