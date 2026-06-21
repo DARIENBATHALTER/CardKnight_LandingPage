@@ -97,7 +97,7 @@ section,header,footer{position:relative;z-index:1}
 .wordmark{display:flex;flex-direction:column;align-items:center;gap:.35rem;margin:.4rem auto 0}
 .wm-title{
   font-family:var(--serif);font-weight:500;text-transform:uppercase;
-  font-size:clamp(2.6rem,8.4vw,5.6rem);line-height:.95;letter-spacing:.06em;
+  font-size:clamp(3rem,9.2vw,6.4rem);line-height:.95;letter-spacing:.06em;
   background:linear-gradient(180deg,#fff4cf 0%,var(--gold) 45%,var(--gold-deep) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 3px 10px rgba(0,0,0,.6)) drop-shadow(0 0 22px rgba(233,196,106,.25));
@@ -115,7 +115,7 @@ section,header,footer{position:relative;z-index:1}
 /* ===== Spinning card (canvas) ===== */
 .spincard{display:block}
 .nav-card{width:50px;height:50px;margin:-8px 0}
-.hero-card{width:clamp(120px,22vw,180px);height:clamp(120px,22vw,180px);margin:0 auto .4rem;
+.hero-card{width:clamp(190px,30vw,270px);height:clamp(190px,30vw,270px);margin:0 auto .2rem;
   filter:drop-shadow(0 12px 30px rgba(0,0,0,.55))}
 .tagline{font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.5rem);color:var(--ink);margin-top:1.2rem;font-weight:500}
 .subtag{color:var(--muted);font-size:clamp(.95rem,1.6vw,1.1rem);margin-top:.4rem}
@@ -148,7 +148,7 @@ section,header,footer{position:relative;z-index:1}
 .feature-wide h3{font-size:1.4rem;margin-bottom:.5rem}
 .feature-wide p{color:var(--muted)}
 .feature-wide{overflow:visible}
-.hero-char{width:clamp(185px,28vw,255px);flex-shrink:0;
+.hero-char{width:clamp(204px,31vw,281px);flex-shrink:0;
   margin:-2.8rem -0.3rem -2.8rem -2.6rem;   /* spill out over the panel's top & left edge */
   filter:drop-shadow(0 16px 30px rgba(0,0,0,.55))}
 
@@ -178,7 +178,7 @@ section,header,footer{position:relative;z-index:1}
 @media (max-width:680px){
   .nav-links{display:none}
   .feature-wide{flex-direction:column;text-align:center}
-  .hero-char{margin:-2.8rem auto -1rem;width:clamp(170px,55vw,220px)}
+  .hero-char{margin:-2.8rem auto -1rem;width:clamp(187px,58vw,242px)}
   .section{padding:4.5rem 1.2rem}
 }
 @media (prefers-reduced-motion:reduce){

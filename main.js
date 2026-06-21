@@ -53,35 +53,40 @@ document.getElementById('steam-btn')?.addEventListener('click', (e) => {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
     const ratio = (img.naturalWidth ? img.naturalHeight / img.naturalWidth : 1.436);
+    const S = Math.min(w, h);
     const cx = w / 2;
     const ph = s.seed + t;
-    const floatY = Math.sin(t * 1.05 + s.seed) * (Math.min(w, h) * 0.045);  // gentle bob
+    const floatY = Math.sin(t * 1.05 + s.seed) * (S * 0.035);   // gentle bob
     const cy = h / 2 + floatY;
     const angle = t * 1.35;                        // spin speed (rad/s)
     const sx = Math.cos(angle);                    // vertical-axis foreshorten
-    const cardH = Math.min(w, h) * 0.72;
+    const cardH = S * 0.62;
     const cardW = cardH / ratio;
     const ew = Math.max(1, cardW * Math.abs(sx));
     const pulse = 0.5 + 0.5 * Math.sin(ph * 1.5);
+    // keep the glow inside the canvas's inscribed circle so it fades out before the
+    // square edge (otherwise the radial light gets clipped into an ugly box)
+    const glowR = S / 2 - S * 0.035 - 2;
 
     // soft golden halo (follows the card)
-    const halo = ctx.createRadialGradient(cx, cy, cardH * 0.08, cx, cy, cardH * 0.85);
+    const halo = ctx.createRadialGradient(cx, cy, cardH * 0.08, cx, cy, glowR);
     halo.addColorStop(0, `rgba(233,196,106,${0.20 + 0.12 * pulse})`);
     halo.addColorStop(1, 'rgba(233,196,106,0)');
     ctx.fillStyle = halo;
-    ctx.beginPath(); ctx.arc(cx, cy, cardH * 0.85, 0, 7); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, glowR, 0, 7); ctx.fill();
 
-    // rotating light-flare rays
+    // rotating light-flare rays (kept within the glow radius)
     ctx.save();
     ctx.translate(cx, cy); ctx.rotate(ph * 0.6);
     ctx.globalCompositeOperation = 'lighter';
+    const rayLen = glowR * 0.92;
     for (let i = 0; i < 4; i++) {
       ctx.rotate(Math.PI / 2);
-      const g = ctx.createLinearGradient(0, 0, cardH * 0.78, 0);
+      const g = ctx.createLinearGradient(0, 0, rayLen, 0);
       g.addColorStop(0, 'rgba(255,240,200,0)');
       g.addColorStop(0.5, `rgba(255,240,200,${0.10 + 0.07 * pulse})`);
       g.addColorStop(1, 'rgba(255,240,200,0)');
-      ctx.fillStyle = g; ctx.fillRect(0, -1.3, cardH * 0.78, 2.6);
+      ctx.fillStyle = g; ctx.fillRect(0, -1.3, rayLen, 2.6);
     }
     ctx.restore();
 
