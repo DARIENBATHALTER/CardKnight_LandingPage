@@ -32,7 +32,8 @@ document.getElementById('steam-btn')?.addEventListener('click', (e) => {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const img = new Image();
   img.src = 'assets/img/spin_card.png';
-  const TILT = -7 * Math.PI / 180;               // gentle diagonal lean
+  const TILT_BASE = -2 * Math.PI / 180;          // slight resting lean
+  const TILT_AMP = 9 * Math.PI / 180;            // wobble amplitude (rocks back & forth)
 
   let states = [];
   function setup(c) {
@@ -105,9 +106,10 @@ document.getElementById('steam-btn')?.addEventListener('click', (e) => {
       ctx.restore();
     }
 
-    // the card itself — tilted on a gentle diagonal, drawn over the particles
+    // the card itself — rocking back & forth as it spins/floats, drawn over the particles
+    const tilt = TILT_BASE + Math.sin(t * 0.9 + s.seed) * TILT_AMP;
     ctx.save();
-    ctx.translate(cx, cy); ctx.rotate(TILT);
+    ctx.translate(cx, cy); ctx.rotate(tilt);
     if (img.complete && img.naturalWidth) {
       ctx.globalAlpha = 0.9 + 0.1 * Math.abs(sx);   // dim slightly edge-on
       ctx.drawImage(img, -ew / 2, -cardH / 2, ew, cardH);
