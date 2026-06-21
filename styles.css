@@ -100,11 +100,7 @@ section,header,footer{position:relative;z-index:1}
   font-size:clamp(2.6rem,8.4vw,5.6rem);line-height:.95;letter-spacing:.06em;
   background:linear-gradient(180deg,#fff4cf 0%,var(--gold) 45%,var(--gold-deep) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  /* dark stroke (8-way) + outer glow, borrowed from the old Luminari treatment */
-  text-shadow:
-    -2px -2px 0 #2a1c05, 2px -2px 0 #2a1c05, -2px 2px 0 #2a1c05, 2px 2px 0 #2a1c05,
-    -2px 0 0 #2a1c05, 2px 0 0 #2a1c05, 0 -2px 0 #2a1c05, 0 2px 0 #2a1c05,
-    0 4px 12px rgba(0,0,0,.55), 0 0 26px rgba(233,196,106,.35);
+  filter:drop-shadow(0 3px 10px rgba(0,0,0,.6)) drop-shadow(0 0 22px rgba(233,196,106,.25));
 }
 .wm-title .sc{ font-size:.74em; }   /* small caps — smaller than the leading caps */
 .wm-sub{
