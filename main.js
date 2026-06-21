@@ -24,6 +24,42 @@ document.getElementById('steam-btn')?.addEventListener('click', (e) => {
   alert('The Steam page is coming soon — follow GitHub Sponsors for launch news!');
 });
 
+/* ===== Sir Reginald Slime speaks (click the mascot) ===== */
+(function () {
+  const wrap = document.querySelector('.nav-mascot-wrap');
+  const img = document.querySelector('.nav-mascot');
+  if (!wrap || !img) return;
+  const IDLE = 'assets/img/mascot.png', TALK = 'assets/img/mascot_talk.png';
+  new Image().src = TALK; // preload so the swap is instant
+  const lines = [
+    'Ah, a visitor. Do mind the ooze.',
+    'The hat? Hand-stitched. By me.',
+    "I'm not a boss. I'm management.",
+    'One does not simply ooze into nobility.',
+    'You there — yes, you have taste.',
+    'Wishlist the game. And, ahem, me.',
+    'Slime today, landed gentry tomorrow.',
+    'Do come in. We are dreadfully charming.',
+  ];
+  let bubble, timer, last = -1;
+  function speak(e) {
+    e.preventDefault(); e.stopPropagation();
+    if (!bubble) { bubble = document.createElement('div'); bubble.className = 'mascot-bubble'; document.body.appendChild(bubble); }
+    let i; do { i = Math.floor(Math.random() * lines.length); } while (i === last && lines.length > 1);
+    last = i;
+    bubble.textContent = lines[i];
+    const r = wrap.getBoundingClientRect();
+    const navBottom = document.querySelector('.nav').getBoundingClientRect().bottom;
+    bubble.style.left = Math.max(10, r.left - 6) + 'px';
+    bubble.style.top = (navBottom + 8) + 'px';
+    requestAnimationFrame(() => bubble.classList.add('show'));
+    img.src = TALK;
+    clearTimeout(timer);
+    timer = setTimeout(() => { img.src = IDLE; bubble.classList.remove('show'); }, 2800);
+  }
+  wrap.addEventListener('click', speak);
+})();
+
 /* ===== Spinning Astral Arcana card (navbar + hero) ===== */
 (function () {
   const cards = [...document.querySelectorAll('.spincard')];
