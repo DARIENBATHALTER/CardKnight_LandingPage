@@ -24,6 +24,34 @@ document.getElementById('steam-btn')?.addEventListener('click', (e) => {
   alert('The Steam page is coming soon — follow GitHub Sponsors for launch news!');
 });
 
+/* ===== Screenshot lightbox ===== */
+(function () {
+  const lb = document.getElementById('lightbox');
+  if (!lb) return;
+  const img = document.getElementById('lightbox-img');
+  const cap = document.getElementById('lightbox-cap');
+  const closeBtn = document.getElementById('lightbox-close');
+  function open(src, alt, caption) {
+    img.src = src; img.alt = alt || ''; cap.textContent = caption || '';
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function hide() {
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.shot').forEach((fig) => {
+    fig.addEventListener('click', () => {
+      const i = fig.querySelector('img');
+      const c = fig.querySelector('figcaption');
+      open(i.currentSrc || i.src, i.alt, c ? c.textContent : '');
+    });
+  });
+  closeBtn.addEventListener('click', hide);
+  lb.addEventListener('click', (e) => { if (e.target === lb) hide(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('open')) hide(); });
+})();
+
 /* ===== Sir Reginald Slime speaks (click the mascot) ===== */
 (function () {
   const wrap = document.querySelector('.nav-mascot-wrap');
