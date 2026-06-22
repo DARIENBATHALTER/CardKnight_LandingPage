@@ -30,32 +30,28 @@ document.getElementById('steam-btn')?.addEventListener('click', (e) => {
   const img = document.querySelector('.nav-mascot');
   if (!wrap || !img) return;
   const IDLE = 'assets/img/mascot.png', TALK = 'assets/img/mascot_talk.png';
+  const LINE = 'Wishlist this game, and, ahem, ME';
   new Image().src = TALK; // preload so the swap is instant
-  const lines = [
-    'Ah, a visitor. Do mind the ooze.',
-    'The hat? Hand-stitched. By me.',
-    "I'm not a boss. I'm management.",
-    'One does not simply ooze into nobility.',
-    'You there — yes, you have taste.',
-    'Wishlist the game. And, ahem, me.',
-    'Slime today, landed gentry tomorrow.',
-    'Do come in. We are dreadfully charming.',
-  ];
-  let bubble, timer, last = -1;
+  const audio = new Audio('assets/audio/slimey.mp3');
+  audio.preload = 'auto';
+
+  let bubble, timer;
+  const stop = () => { img.src = IDLE; bubble && bubble.classList.remove('show'); };
+  audio.addEventListener('ended', stop);
+
   function speak(e) {
     e.preventDefault(); e.stopPropagation();
     if (!bubble) { bubble = document.createElement('div'); bubble.className = 'mascot-bubble'; document.body.appendChild(bubble); }
-    let i; do { i = Math.floor(Math.random() * lines.length); } while (i === last && lines.length > 1);
-    last = i;
-    bubble.textContent = lines[i];
+    bubble.textContent = LINE;
     const r = wrap.getBoundingClientRect();
     const navBottom = document.querySelector('.nav').getBoundingClientRect().bottom;
     bubble.style.left = Math.max(10, r.left - 6) + 'px';
     bubble.style.top = (navBottom + 8) + 'px';
     requestAnimationFrame(() => bubble.classList.add('show'));
     img.src = TALK;
+    try { audio.currentTime = 0; audio.play(); } catch (_) {}
     clearTimeout(timer);
-    timer = setTimeout(() => { img.src = IDLE; bubble.classList.remove('show'); }, 2800);
+    timer = setTimeout(stop, 6000); // fallback if audio is blocked/unavailable
   }
   wrap.addEventListener('click', speak);
 })();
