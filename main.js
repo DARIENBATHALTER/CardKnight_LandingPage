@@ -1,6 +1,6 @@
 // nav background on scroll
 const nav = document.getElementById('nav');
-const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 6);
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
