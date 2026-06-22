@@ -18,10 +18,12 @@ document.querySelectorAll('.reveal').forEach((el, i) => {
 // year
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-// placeholder Steam button — friendly notice until the store page is live
-document.getElementById('steam-btn')?.addEventListener('click', (e) => {
-  e.preventDefault();
-  alert('The Steam page is coming soon — follow GitHub Sponsors for launch news!');
+// placeholder links — friendly notice until the real URLs are wired in
+document.querySelectorAll('a.soon').forEach((a) => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    alert(a.dataset.msg || 'Coming soon!');
+  });
 });
 
 /* ===== Screenshot lightbox ===== */
