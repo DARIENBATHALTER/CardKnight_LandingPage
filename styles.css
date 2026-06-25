@@ -199,6 +199,20 @@ section,header,footer{position:relative;z-index:1}
 .video-frame video{display:block;width:100%;aspect-ratio:16/9;border-radius:calc(var(--r) - 6px);
   background:#000;box-shadow:0 10px 40px rgba(0,0,0,.4)}
 
+/* ===== Background-music toggle ===== */
+.music-toggle{position:fixed;right:1.1rem;bottom:1.1rem;z-index:80;
+  width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--gold);background:var(--glass);border:1px solid var(--glass-brd);
+  backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,.4);
+  transition:color .2s,border-color .2s,transform .2s}
+.music-toggle:hover{transform:translateY(-2px);border-color:var(--line)}
+.music-toggle.muted{color:var(--muted)}
+.music-toggle svg{width:20px;height:20px;fill:currentColor;pointer-events:none}
+/* gentle pulse while playing, to hint it's a music control */
+.music-toggle.playing::after{content:"";position:absolute;inset:-1px;border-radius:50%;
+  border:1px solid var(--gold);opacity:.5;animation:music-ping 2.4s ease-out infinite}
+@keyframes music-ping{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.5);opacity:0}}
+
 /* ===== Lightbox ===== */
 .lightbox{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
   padding:5vmin;background:rgba(5,6,12,.84);backdrop-filter:blur(8px);

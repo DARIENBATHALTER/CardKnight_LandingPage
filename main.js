@@ -48,6 +48,45 @@ document.querySelectorAll('a.soon').forEach((a) => {
   });
 });
 
+/* ===== Background music (title theme, quiet) ===== */
+(function () {
+  const audio = document.getElementById('bg-music');
+  const btn = document.getElementById('music-toggle');
+  if (!audio || !btn) return;
+  audio.volume = 0.22;                                  // quiet
+  const ICON_ON =
+    '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/>' +
+    '<path d="M16 8.7a4 4 0 010 6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' +
+    '<path d="M18.6 6a7 7 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const ICON_OFF =
+    '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/>' +
+    '<path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const KEY = 'ck_music';
+  let on = localStorage.getItem(KEY) !== 'off';         // default on
+  const render = () => {
+    btn.innerHTML = on ? ICON_ON : ICON_OFF;
+    btn.classList.toggle('muted', !on);
+    btn.classList.toggle('playing', on && !audio.paused);
+  };
+  const start = () => { audio.play().catch(() => {}); };
+  function armGesture() {                               // autoplay-with-sound is blocked; start on 1st gesture
+    const evs = ['pointerdown', 'keydown', 'touchstart', 'scroll'];
+    const go = () => { evs.forEach((e) => window.removeEventListener(e, go)); if (on) start(); };
+    evs.forEach((e) => window.addEventListener(e, go, { passive: true }));
+  }
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    on = !on;
+    localStorage.setItem(KEY, on ? 'on' : 'off');
+    if (on) start(); else audio.pause();
+    render();
+  });
+  audio.addEventListener('play', render);
+  audio.addEventListener('pause', render);
+  render();
+  if (on) { start(); armGesture(); }
+})();
+
 /* ===== Screenshot lightbox ===== */
 (function () {
   const lb = document.getElementById('lightbox');
