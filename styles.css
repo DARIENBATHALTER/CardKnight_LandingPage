@@ -192,6 +192,12 @@ section,header,footer{position:relative;z-index:1}
 .shot img{width:100%;aspect-ratio:16/10;object-fit:cover;border-bottom:1px solid var(--glass-brd)}
 .shot figcaption{padding:.9rem 1.1rem;font-size:.92rem;color:var(--gold);font-family:var(--serif);font-weight:500;letter-spacing:.05em}
 
+/* ===== Video / combat supercut ===== */
+.video-section{max-width:1080px}
+.video-frame{padding:.5rem;overflow:hidden;margin:0 auto;max-width:980px}
+.video-frame video{display:block;width:100%;aspect-ratio:16/9;border-radius:calc(var(--r) - 6px);
+  background:#000;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+
 /* ===== Lightbox ===== */
 .lightbox{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
   padding:5vmin;background:rgba(5,6,12,.84);backdrop-filter:blur(8px);
