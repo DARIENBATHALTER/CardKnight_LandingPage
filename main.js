@@ -18,6 +18,28 @@ document.querySelectorAll('.reveal').forEach((el, i) => {
 // year
 document.getElementById('yr').textContent = new Date().getFullYear();
 
+// talking/blinking NPC portrait(s) — swap idle/talk/blink frames
+document.querySelectorAll('.talk-portrait').forEach((el) => {
+  const base = el.dataset.base;
+  const f = (s) => `${base}_${s}.png`;
+  ['idle', 'talk', 'blink1', 'blink2'].forEach((s) => { const i = new Image(); i.src = f(s); });
+  let mouth = 0;
+  const next = () => setTimeout(step, 150 + Math.random() * 150);
+  function step() {
+    if (document.hidden) { next(); return; }
+    if (Math.random() < 0.12) {                 // blink
+      el.src = f('blink1');
+      setTimeout(() => { el.src = f('blink2'); }, 70);
+      setTimeout(() => { el.src = f('idle'); next(); }, 150);
+    } else {                                     // talk flap
+      mouth ^= 1;
+      el.src = mouth ? f('talk') : f('idle');
+      next();
+    }
+  }
+  step();
+});
+
 // placeholder links — friendly notice until the real URLs are wired in
 document.querySelectorAll('a.soon').forEach((a) => {
   a.addEventListener('click', (e) => {
