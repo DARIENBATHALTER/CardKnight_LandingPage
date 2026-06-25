@@ -157,8 +157,8 @@ section,header,footer{position:relative;z-index:1}
 @keyframes bob{50%{transform:translate(-50%,8px)}}
 
 /* ===== Sections ===== */
-.section{max-width:var(--maxw);margin:0 auto;padding:6.5rem 1.5rem}
-.section-head{text-align:center;max-width:760px;margin:0 auto 3.2rem}
+.section{max-width:var(--maxw);margin:0 auto;padding:4.25rem 1.5rem}
+.section-head{text-align:center;max-width:760px;margin:0 auto 2.4rem}
 .section-head h2,.support h2,.showcase-text h2,.cta-panel h2{font-size:clamp(1.9rem,4vw,2.9rem)}
 .lede{color:var(--muted);font-size:clamp(1rem,1.6vw,1.18rem);margin-top:1rem}
 
@@ -194,7 +194,7 @@ section,header,footer{position:relative;z-index:1}
 .shot figcaption{padding:.9rem 1.1rem;font-size:.92rem;color:var(--gold);font-family:var(--serif);font-weight:500;letter-spacing:.05em}
 
 /* ===== Video / combat supercut ===== */
-.video-section{max-width:1080px}
+.video-section{max-width:1080px;padding-top:1.25rem;padding-bottom:2rem}
 .video-frame{padding:.5rem;overflow:hidden;margin:0 auto;max-width:980px}
 .video-frame video{display:block;width:100%;aspect-ratio:16/9;border-radius:calc(var(--r) - 6px);
   background:#000;box-shadow:0 10px 40px rgba(0,0,0,.4)}
